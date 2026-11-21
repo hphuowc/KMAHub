@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý điểm danh & Xử lý ngoại lệ — KMA Hub</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
+    <link rel="stylesheet" href="../../assets/css/layouts.css" />
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    /* Evidence Modal Styling */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .evidence-modal-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-2xl);
+      max-width: 760px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--color-border);
+      animation: modalFadeIn 0.2s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .evidence-photo-box {
+      background: var(--color-bg-dark);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      text-align: center;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+    .evidence-photo-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      background: #1F2937;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 768px) {
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+      .mobile-menu-btn {
+        display: inline-flex !important;
+      }
+      .sidebar {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        top: 0; left: 0; bottom: 0;
+      }
+      .sidebar.open {
+        display: flex;
+      }
+      .btc-main {
+        margin-left: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout-btc">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="../../assets/images/kma-logo.png" alt="Logo Học viện Kỹ thuật Mật mã" class="sidebar-brand-logo" />
+        <div>
+          <h2>KMA <span>Hub</span></h2>
+          <p>Học viện Kỹ thuật Mật mã</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </span>
+          <span>Tổng quan</span>
+        </a>
+        <a href="events.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </span>
+          <span>Quản lý sự kiện</span>
+        </a>
+        <a href="registrants.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </span>
+          <span>Danh sách đăng ký</span>
+        </a>
+        <a href="attendance.html" class="sidebar-link active">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </span>
+          <span>Quản lý điểm danh</span>
+        </a>
+        <a href="reports.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          </span>
+          <span>Thống kê</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="../common/account-info.html?role=btc" class="sidebar-profile-card" title="Xem hồ sơ Ban Tổ Chức">
+          <div class="sidebar-profile-avatar">BTC</div>
+          <div class="sidebar-profile-info">
+            <div class="sidebar-profile-name">Ban Tổ Chức</div>
+            <div class="sidebar-profile-sub">btc_doantruong@actvn.edu.vn</div>
+          </div>
+        </a>
+        <a href="../auth/login.html" class="sidebar-link" style="color: rgba(255,255,255,0.8);" onclick="localStorage.removeItem('kma_user_role')">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </span>
+          <span>Đăng xuất</span>
+        </a>
+      </div>
+    </aside>
+
+    <div class="btc-main">
+      <div class="btc-topbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button type="button" class="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div style="font-size: 14px; font-weight: 800; color: var(--color-primary); letter-spacing: 0.4px; display: flex; align-items: center; gap: 8px;">
+            <span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--color-accent);"></span>
+            BAN TỔ CHỨC SỰ KIỆN HỌC VIỆN KỸ THUẬT MẬT MÃ
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="kma-clock-pill" title="Thời gian thực hệ thống">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="kma-live-clock">--:--:--</span>
+          </div>
+          <div class="kma-notif-wrap" data-notif-role="btc">
+          <button type="button" class="navbar-bell" title="Thông báo" aria-label="Thông báo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="kma-notif-badge" style="display:none;">0</span>
+          </button>
+        </div>
+        </div>
+      </div>
+
+      <div class="btc-content">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h1 style="font-size: 26px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 4px;">
+              Quản lý điểm danh
+            </h1>
+            <p style="color: var(--color-text-muted); font-size: 14px;">
+              Hội thảo An ninh mạng 2025 • Hội trường A1
+            </p>
+          </div>
+          <div>
+            <button class="btn btn-outline btn-sm" onclick="refreshData()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              Làm mới dữ liệu
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-body" style="padding: 16px 20px;">
+            <div class="filter-tabs">
+              <button class="filter-tab active" onclick="filterTable('all')">Tất cả (86)</button>
+              <button class="filter-tab" onclick="filterTable('valid')">Hợp lệ (68)</button>
+              <button class="filter-tab" style="background:#FEF3C7; color:#B45309; border-color:#FDE68A;" onclick="filterTable('review')">Chờ xem xét (18)</button>
+              <button class="filter-tab" style="background:#FEE2E2; color:#B91C1C; border-color:#FECACA;" onclick="filterTable('rejected')">Từ chối (0)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attendance Data Table -->
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="table-wrapper" style="border: none; border-radius: 0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sinh viên</th>
+                  <th>GPS Thực tế</th>
+                  <th>Đối chiếu Khuôn mặt</th>
+                  <th>Kết quả AI</th>
+                  <th style="text-align: right;">Bằng chứng & Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Student 1: Valid -->
+                <tr>
+                  <td>
+                    <div style="font-weight: 700; color: var(--color-text-primary);">Nguyễn Minh Anh</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">AT180123 • AT18A</div>
+                  </td>
+                  <td>
+                    <div style="color: var(--color-success); font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      Trong 12m
+                    </div>
+                    <div style="font-size: 11px; color: var(--color-text-muted);">Sai số GPS: 4m</div>
+                  </td>
+                  <td>
+                    <div style="color: var(--color-success); font-weight: 700;">Khớp 98.4%</div>
+                    <div style="font-size: 11px; color: var(--color-text-muted);">Đạt ngưỡng ≥ 85%</div>
+                  </td>
+                  <td><span class="badge badge-success">Đã điểm danh</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-outline btn-sm" onclick="openEvidenceModal('Nguyễn Minh Anh', 'AT180123', 'Trong 12m', 'Khớp 98.4%', 'MATCH', 'Điểm danh hợp lệ.', true)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                      Xem minh chứng
+                    </button>
+                  </td>
+                </tr>
+
+                <tr style="background: #FFFBEB;">
+                  <td>
+                    <div style="font-weight: 700; color: var(--color-text-primary);">Trần Quốc Bảo</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">AT180245 • AT17B</div>
+                  </td>
+                  <td>
+                    <div style="color: var(--color-warning); font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                      Lệch 64m / 50m
+                    </div>
+                    <div style="font-size: 11px; color: var(--color-text-muted);">Khu vực Hội trường A1</div>
+                  </td>
+                  <td>
+                    <div style="color: var(--color-success); font-weight: 700;">Khớp 96.2%</div>
+                    <div style="font-size: 11px; color: var(--color-text-muted);">Đạt ngưỡng ≥ 85%</div>
+                  </td>
+                  <td><span class="badge badge-warning">Chờ xem xét</span></td>
+                  <td style="text-align: right;">
+                    <div style="display: inline-flex; gap: 6px;">
+                      <button class="btn btn-outline btn-sm" onclick="openEvidenceModal('Trần Quốc Bảo', 'AT180245', 'Lệch 64m / 50m', 'Khớp 96.2%', 'GPS_OUT_OF_BOUNDS', 'Tín hiệu vệ tinh yếu tại khu vực hội trường, ảnh khuôn mặt khớp hồ sơ.', false)">
+                        Xem minh chứng
+                      </button>
+                      <button class="btn btn-primary btn-sm" style="background: #15803D;" onclick="approveAttendance('Trần Quốc Bảo')">Duyệt</button>
+                      <button class="btn btn-danger btn-sm" onclick="rejectAttendance('Trần Quốc Bảo')">Từ chối</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr style="background: #FFFBEB;">
+                  <td>
+                    <div style="font-weight: 700; color: var(--color-text-primary);">Lê Hoàng Nam</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">AT180378 • AT18C</div>
+                  </td>
+                  <td>
+                    <div style="color: var(--color-success); font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      Trong 8m
+                    </div>
+                    <div style="font-size: 11px; color: var(--color-text-muted);">Tâm Hội trường A1</div>
+                  </td>
+                  <td>
+                    <div style="color: var(--color-error); font-weight: 700;">Độ khớp 74%</div>
+                    <div style="font-size: 11px; color: var(--color-text-muted);">Dưới ngưỡng 85%</div>
+                  </td>
+                  <td><span class="badge badge-warning">Chờ xem xét</span></td>
+                  <td style="text-align: right;">
+                    <div style="display: inline-flex; gap: 6px;">
+                      <button class="btn btn-outline btn-sm" onclick="openEvidenceModal('Lê Hoàng Nam', 'AT180378', 'Trong 8m', 'Độ khớp 74.5%', 'UNCERTAIN', 'Ánh sáng yếu khi chụp ảnh tại hội trường, sinh viên đã gửi kèm minh chứng điểm danh bù.', false)">
+                        Xem minh chứng
+                      </button>
+                      <button class="btn btn-primary btn-sm" style="background: #15803D;" onclick="approveAttendance('Lê Hoàng Nam')">Duyệt</button>
+                      <button class="btn btn-danger btn-sm" onclick="rejectAttendance('Lê Hoàng Nam')">Từ chối</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- EVIDENCE MODAL (Yêu cầu số 8) -->
+  <div class="modal-backdrop" id="evidenceModal" onclick="handleBackdropClick(event)">
+    <div class="evidence-modal-card">
+      <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800; color: var(--color-text-primary);" id="modalStudentTitle">
+            Bằng chứng điểm danh — Nguyễn Minh Anh
+          </h2>
+          <div style="font-size: 12px; color: var(--color-text-muted);" id="modalStudentSubtitle">
+            MSSV: AT180123 • Phiên: Check-in (08:14:22 — 24/04/2025)
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="closeEvidenceModal()" style="font-size: 18px; line-height: 1; padding: 6px 10px;">✕</button>
+      </div>
+
+      <div style="padding: 24px;">
+        
+        <div style="font-size: 13px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 8px;">
+          Hình ảnh minh chứng điểm danh:
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
+          
+          <div style="border: 1px solid var(--color-border); border-radius: 10px; padding: 10px; background: #FAFAFA; text-align: center;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--color-primary); margin-bottom: 6px;">
+              1. Ảnh chụp khuôn mặt
+            </div>
+            <div style="height: 140px; background: #1F2937; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #D1D5DB;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span style="font-size: 11px; margin-top: 4px;">Chụp tại hội trường</span>
+            </div>
+            <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">Đối chiếu hồ sơ KMA</div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 10px; padding: 10px; background: #FAFAFA; text-align: center;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--color-primary); margin-bottom: 6px;">
+              2. Ảnh toàn cảnh sự kiện
+            </div>
+            <div style="height: 140px; background: var(--color-bg-rose); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--color-primary);">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span style="font-size: 11px; margin-top: 4px;">Khu vực tổ chức</span>
+            </div>
+            <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">Hội trường A1 KMA</div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 10px; padding: 10px; background: #FAFAFA; text-align: center;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--color-accent); margin-bottom: 6px;">
+              3. Thẻ sinh viên / Xác nhận
+            </div>
+            <div style="height: 140px; background: #FEF3C7; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #92400E;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+              <span style="font-size: 11px; margin-top: 4px;">Minh chứng bổ sung</span>
+            </div>
+            <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">Xác nhận Ban Tổ Chức</div>
+          </div>
+
+        </div>
+
+        <div class="card" style="background: var(--color-bg-muted); margin-bottom: 16px;">
+          <div class="card-body" style="padding: 16px;">
+            <div style="font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--color-primary);">
+              Thông số vị trí GPS
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+              <div>• <strong>Tọa độ:</strong> 20.98064 N, 105.79632 E</div>
+              <div>• <strong>Khoảng cách:</strong> <span id="modalDistance" style="font-weight: 700;">Trong 12m</span></div>
+              <div>• <strong>Bán kính sự kiện:</strong> 50 mét</div>
+              <div>• <strong>Sai số vệ tinh:</strong> 4.2 mét</div>
+              <div>• <strong>Trạng thái định vị:</strong> <span style="color: var(--color-success); font-weight: 700;">Hợp lệ</span></div>
+              <div>• <strong>Thiết bị:</strong> Safari • iOS</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Similarity & Note -->
+        <div class="card" style="border-color: var(--color-border); margin-bottom: 20px;">
+          <div class="card-body" style="padding: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <div style="font-size: 13px; font-weight: 700;">Độ tương đồng khuôn mặt AI:</div>
+              <span class="badge badge-success" id="modalAiBadge" style="font-size: 13px;">Khớp 98.4%</span>
+            </div>
+            <div style="font-size: 12px; color: var(--color-text-secondary); line-height: 1.5;" id="modalReason">
+              Điểm danh tự động qua AI và GPS thành công.
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button class="btn btn-ghost" onclick="closeEvidenceModal()">Đóng</button>
+          <button class="btn btn-danger" id="modalRejectBtn" onclick="rejectCurrentModal()">Từ chối điểm danh</button>
+          <button class="btn btn-primary" id="modalApproveBtn" style="background: #15803D;" onclick="approveCurrentModal()">Duyệt điểm danh hợp lệ</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="../../assets/js/core/config.js"></script>
+  <script src="../../assets/js/core/api.js"></script>
+  <script src="../../assets/js/core/icons.js"></script>
+  <script src="../../assets/js/core/security.js"></script>
+  <script src="../../assets/js/core/notifications.js"></script>
+  <script src="../../assets/js/pages/btc/attendance.js"></script>
+</body>
+</html>

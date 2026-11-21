@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lịch sử điểm danh — KMA Hub</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
+    <link rel="stylesheet" href="../../assets/css/layouts.css" />
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    .profile-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      text-align: center;
+    }
+    .profile-avatar-large {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-sidebar), var(--color-primary));
+      color: #FFFFFF;
+      font-size: 36px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+      border: 4px solid var(--color-border-rose);
+    }
+    .face-sample-box {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--color-bg-muted);
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--color-border);
+    }
+    @media (max-width: 768px) {
+      .grid-cols-3 {
+        grid-template-columns: 1fr !important;
+      }
+      div[style*="grid-column: span 2"] {
+        grid-column: span 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <a href="home.html" class="navbar-brand">
+        <img src="../../assets/images/kma-logo.png" alt="Logo Học viện Kỹ thuật Mật mã" class="navbar-brand-logo" />
+        <div>
+          KMA <span>Hub</span>
+          <div style="font-size: 10px; font-weight: 500; color: var(--color-text-muted); line-height: 1;">Học viện Kỹ thuật Mật mã</div>
+        </div>
+      </a>
+      <button type="button" class="mobile-menu-btn" onclick="document.querySelector('.navbar').classList.toggle('open')" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <nav class="navbar-nav">
+        <a href="home.html">Trang chủ</a>
+        <a href="event-detail.html">Sự kiện</a>
+        <a href="attendance.html">Điểm danh</a>
+        <a href="history.html" class="active">Lịch sử</a>
+        <a href="makeup.html">Bổ sung</a>
+      </nav>
+    </div>
+
+    <div class="navbar-user">
+      <div class="kma-clock-pill" title="Thời gian thực hệ thống">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="kma-live-clock">--:--:--</span>
+      </div>
+      <div class="kma-notif-wrap" data-notif-role="student">
+          <button type="button" class="navbar-bell" title="Thông báo" aria-label="Thông báo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="kma-notif-badge" style="display:none;">0</span>
+          </button>
+        </div>
+      <a href="../common/account-info.html?role=student" class="navbar-profile-link" title="Xem thông tin cá nhân">
+        <div class="avatar">A</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; line-height: 1.25;">Nguyễn Văn A</div>
+          <div style="font-size: 11px; color: var(--color-text-muted); line-height: 1.25;">AT180123 • AT18</div>
+        </div>
+      </a>
+      <a href="../auth/login.html" class="btn btn-ghost btn-sm" onclick="localStorage.removeItem('kma_user_role')">Đăng xuất</a>
+    </div>
+  </header>
+
+  <main class="page-content" style="max-width: 1120px;">
+
+    <div class="section-header">
+      <div>
+        <h1 class="section-title">Hồ sơ & Lịch sử điểm danh</h1>
+        <p class="section-subtitle">Theo dõi quá trình tham gia sự kiện và điểm rèn luyện của sinh viên</p>
+      </div>
+      <div>
+        
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-8">
+      
+      <!-- Left Column: Student Profile (1 col) -->
+      <div>
+        <div class="profile-card">
+          <div class="profile-avatar-large">A</div>
+          <h2 style="font-size: 20px; margin-bottom: 4px;">Nguyễn Văn A</h2>
+          <div style="font-size: 13px; color: var(--color-text-muted); margin-bottom: 16px;">
+            MSSV: <span style="font-weight: 600; color: var(--color-primary);">AT180123</span>
+          </div>
+
+          <div style="text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 8px;">
+              <span style="color: var(--color-text-muted);">Khóa học:</span>
+              <span style="font-weight: 600;">AT18 (2021 - 2026)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 8px;">
+              <span style="color: var(--color-text-muted);">Lớp:</span>
+              <span style="font-weight: 600;">AT18A</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--color-text-muted);">Khoa:</span>
+              <span style="font-weight: 600;">An toàn Thông tin</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Attendance History Table (2 cols) -->
+      <div style="grid-column: span 2;">
+        
+        <div class="card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 16px; margin: 0;">Danh sách sự kiện đã tham gia</h3>
+            <span class="badge badge-primary">Tổng: 3 sự kiện</span>
+          </div>
+
+          <div class="table-wrapper" style="border: none; border-radius: 0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sự kiện</th>
+                  <th>Ngày</th>
+                  <th>GPS</th>
+                  <th>Khuôn mặt</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="font-weight: 600;">Hội thảo An ninh mạng 2025</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Hội trường A1</div>
+                  </td>
+                  <td>24/04/2025</td>
+                  <td><span style="color: var(--color-success); font-weight: 600;">Trong 12m</span></td>
+                  <td><span style="color: var(--color-success); font-weight: 600;">Khớp 98%</span></td>
+                  <td><span class="badge badge-success">Hợp lệ</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div style="font-weight: 600;">Workshop AI Innovation</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Hội trường B2</div>
+                  </td>
+                  <td>20/04/2025</td>
+                  <td><span style="color: var(--color-warning); font-weight: 600;">Lệch 34m</span></td>
+                  <td><span style="color: var(--color-success); font-weight: 600;">Khớp 96%</span></td>
+                  <td><span class="badge badge-warning">Chờ duyệt</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div style="font-weight: 600;">Ngày hội Sinh viên KMA</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Sân trường KMA</div>
+                  </td>
+                  <td>15/04/2025</td>
+                  <td><span style="color: var(--color-success); font-weight: 600;">Trong 8m</span></td>
+                  <td><span style="color: var(--color-error); font-weight: 600;">Không nhận diện</span></td>
+                  <td><span class="badge badge-warning">Chờ xem xét</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card-footer" style="background: var(--color-bg-muted); font-size: 12px; color: var(--color-text-muted); display: flex; justify-content: flex-end; align-items: center;">
+            <a href="makeup.html" class="action-link">Yêu cầu điểm danh bù</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  <script src="../../assets/js/core/config.js"></script>
+  <script src="../../assets/js/core/api.js"></script>
+  <script src="../../assets/js/core/icons.js"></script>
+  <script src="../../assets/js/core/security.js"></script>
+  <script src="../../assets/js/core/notifications.js"></script>
+</body>
+</html>

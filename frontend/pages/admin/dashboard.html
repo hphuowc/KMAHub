@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng điều khiển Quản trị viên — KMA Hub</title>
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
+    <link rel="stylesheet" href="../../assets/css/layouts.css" />
+  <style>
+    body { font-family: 'Nunito', sans-serif; }
+    @media (max-width: 768px) {
+      .mobile-menu-btn { display: inline-flex !important; }
+      .sidebar { display: none; position: fixed; z-index: 999; top: 0; left: 0; bottom: 0; }
+      .sidebar.open { display: flex; }
+      .btc-main { margin-left: 0 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout-btc">
+    
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="../../assets/images/kma-logo.png" alt="Logo Học viện Kỹ thuật Mật mã" class="sidebar-brand-logo" />
+        <div>
+          <h2>KMA <span>Hub</span></h2>
+          <p>Học viện Kỹ thuật Mật mã</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link active">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </span>
+          <span>Tổng quan</span>
+        </a>
+        <a href="users.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </span>
+          <span>Tài khoản & Phân quyền</span>
+        </a>
+        <a href="events.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </span>
+          <span>Giám sát sự kiện</span>
+        </a>
+        <a href="categories.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          </span>
+          <span>Danh mục sự kiện</span>
+        </a>
+        <a href="system.html" class="sidebar-link">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
+          <span>Cấu hình AI & Hệ thống</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="../common/account-info.html?role=admin" class="sidebar-profile-card" title="Xem hồ sơ Quản trị viên">
+          <div class="sidebar-profile-avatar">AD</div>
+          <div class="sidebar-profile-info">
+            <div class="sidebar-profile-name">Admin quản trị hệ thống</div>
+            <div class="sidebar-profile-sub">admin@actvn.edu.vn</div>
+          </div>
+        </a>
+        <a href="../auth/login.html" class="sidebar-link" style="color: rgba(255,255,255,0.8);" onclick="localStorage.removeItem('kma_user_role')">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </span>
+          <span>Đăng xuất</span>
+        </a>
+      </div>
+    </aside>
+
+    <div class="btc-main">
+      <div class="btc-topbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button type="button" class="mobile-menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div style="font-size: 14px; font-weight: 800; color: var(--color-primary); letter-spacing: 0.4px; display: flex; align-items: center; gap: 8px;">
+            <span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--color-accent);"></span>
+            HỆ THỐNG ADMIN
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="kma-clock-pill" title="Thời gian thực hệ thống">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="kma-live-clock">--:--:--</span>
+          </div>
+          <div class="kma-notif-wrap" data-notif-role="admin">
+          <button type="button" class="navbar-bell" title="Thông báo" aria-label="Thông báo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="kma-notif-badge" style="display:none;">0</span>
+          </button>
+        </div>
+        </div>
+      </div>
+
+      <div class="btc-content">
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h1 style="font-size: 26px; font-weight: 800; color: var(--color-text-primary); margin-bottom: 4px;">
+              Bảng điều khiển Quản trị viên
+            </h1>
+            <p style="color: var(--color-text-muted); font-size: 14px;">Giám sát toàn diện tài khoản, sự kiện, AI Face Verification và tính toàn vẹn hệ thống KMA Hub</p>
+          </div>
+          <div>
+            <a href="users.html" class="btn btn-primary btn-sm">+ Cấp tài khoản mới</a>
+          </div>
+        </div>
+
+        <!-- 4 KPI Stat Cards -->
+        <div class="grid grid-cols-4 gap-6" style="margin-bottom: 32px;">
+          <div class="stat-card">
+            <div class="stat-label">Tổng tài khoản toàn trường</div>
+            <div class="stat-value text-primary">2.456</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Sinh viên đang hoạt động</div>
+            <div class="stat-value" style="color: var(--color-success);">1.892</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Mẫu Face AI đã nạp</div>
+            <div class="stat-value">2.450 / 2.456</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Cảnh báo gian lận GPS</div>
+            <div class="stat-value" style="color: var(--color-error);">0</div>
+          </div>
+        </div>
+
+        <!-- System Status & Quick Links -->
+        <div class="grid grid-cols-3 gap-8" style="margin-bottom: 28px;">
+          
+          <div class="card" style="grid-column: span 2;">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="font-size: 16px; margin: 0;">Trạng thái vận hành hệ thống</h3>
+              <span class="badge badge-success">Ổn định</span>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;">
+                  <div>
+                    <div style="font-weight: 700;">Cổng dịch vụ sự kiện & tài khoản</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Xử lý đăng ký tham gia và quản lý phân quyền</div>
+                  </div>
+                  <span class="badge badge-success">Hoạt động</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;">
+                  <div>
+                    <div style="font-weight: 700;">Hệ thống nhận diện khuôn mặt</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Đối chiếu hình ảnh điểm danh trực tuyến</div>
+                  </div>
+                  <span class="badge badge-success">Hoạt động</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;">
+                  <div>
+                    <div style="font-weight: 700;">Cơ sở dữ liệu trung tâm</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Lưu trữ hồ sơ sinh viên và lịch sử điểm danh</div>
+                  </div>
+                  <span class="badge badge-success">Hoạt động</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-weight: 700;">Kho lưu trữ minh chứng</div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Lưu trữ bảo mật hình ảnh sự kiện nội bộ</div>
+                  </div>
+                  <span class="badge badge-success">Hoạt động</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions for Admin -->
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <h3 style="font-size: 16px; margin: 0;">Lối tắt Quản trị</h3>
+              </div>
+              <div class="card-body" style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="users.html" class="btn btn-outline btn-block" style="text-align: left; justify-content: flex-start;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:text-bottom;margin-right:4px;"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="19" cy="7" r="3"/><path d="M21 21v-1a3 3 0 0 0-2-2.83"/></svg> Quản lý tài khoản & phân quyền
+                </a>
+                <a href="events.html" class="btn btn-outline btn-block" style="text-align: left; justify-content: flex-start;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:text-bottom;margin-right:4px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Giám sát toàn bộ sự kiện BTC
+                </a>
+                <a href="categories.html" class="btn btn-outline btn-block" style="text-align: left; justify-content: flex-start;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:text-bottom;margin-right:4px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Quản lý danh mục sự kiện
+                </a>
+                <a href="system.html" class="btn btn-outline btn-block" style="text-align: left; justify-content: flex-start;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:text-bottom;margin-right:4px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Cấu hình AI & Ngưỡng GPS
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Recent Accounts -->
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 16px; margin: 0;">Tài khoản mới cấp gần đây</h3>
+            <a href="users.html" class="action-link">Xem tất cả tài khoản →</a>
+          </div>
+          <div class="table-wrapper" style="border: none; border-radius: 0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tài khoản</th>
+                  <th>Họ và tên</th>
+                  <th>Vai trò</th>
+                  <th>Dữ liệu khuôn mặt</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 700;">AT180123</td>
+                  <td>Nguyễn Văn A</td>
+                  <td><span class="badge badge-neutral">Sinh viên</span></td>
+                  <td><span class="badge badge-success">Đã kích hoạt</span></td>
+                  <td><span class="badge badge-success">Hoạt động</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700;">btc_doantruong@actvn.edu.vn</td>
+                  <td>Đoàn Thanh Niên KMA</td>
+                  <td><span class="badge badge-accent" style="background: var(--color-accent); color: #FFFFFF;">Ban tổ chức</span></td>
+                  <td>—</td>
+                  <td><span class="badge badge-success">Hoạt động</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 700;">admin@actvn.edu.vn</td>
+                  <td>Quản trị viên Hệ thống</td>
+                  <td><span class="badge badge-primary">Quản trị viên</span></td>
+                  <td>—</td>
+                  <td><span class="badge badge-success">Hoạt động</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="../../assets/js/core/config.js"></script>
+  <script src="../../assets/js/core/api.js"></script>
+  <script src="../../assets/js/core/icons.js"></script>
+  <script src="../../assets/js/core/security.js"></script>
+  <script src="../../assets/js/core/notifications.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies & Virtual Environments
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Cloud & Deployment
+.vercel/
+.netlify/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
