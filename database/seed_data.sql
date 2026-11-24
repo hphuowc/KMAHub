@@ -23,7 +23,7 @@ INSERT INTO `locations` (`id`, `name`, `address`, `latitude`, `longitude`, `defa
 
 
 -- 3. SEED DỮ LIỆU BẢNG `users`
--- Mật khẩu băm mẫu cho '123456': $2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW
+-- Mật khẩu băm mẫu cho '123456': $2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2
 -- Đầy đủ 3 vai trò: Admin, Ban Tổ Chức (BTC), Sinh viên (AT180123, AT180245, AT180378, CT060112...)
 INSERT INTO `users` (
   `id`, `username`, `email`, `password_hash`, `role`, `full_name`, `phone`, `avatar_url`,
@@ -33,7 +33,7 @@ INSERT INTO `users` (
 -- Quản trị viên
 (
   'u_admin_001', 'admin', 'admin@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'admin', 'Admin Quản trị Hệ thống', '024.3854.3930', '../../assets/images/kma-logo.png',
   NULL, NULL, NULL, 'Phòng Đào tạo & CNTT', NULL, 'KMA_ADMIN', 'Toàn quyền hệ thống',
   NULL, NULL, 1
@@ -41,14 +41,14 @@ INSERT INTO `users` (
 -- Ban Tổ Chức
 (
   'u_btc_001', 'btc_doantruong', 'btc_doantruong@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'btc', 'Đoàn Thanh Niên — Ban Tổ Chức KMA', '024.3854.3930', '../../assets/images/kma-logo.png',
   NULL, NULL, NULL, NULL, NULL, 'BTC_DOANTRUONG', 'Sự kiện sinh viên toàn Học viện',
   NULL, NULL, 1
 ),
 (
   'u_btc_002', 'clb_ai_kma', 'clb_ai@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'btc', 'CLB Trí tuệ Nhân tạo KMA', '0988.123.456', NULL,
   NULL, NULL, NULL, NULL, NULL, 'CLB_AI_KMA', 'Cuộc thi & Hội thảo AI',
   NULL, NULL, 1
@@ -56,7 +56,7 @@ INSERT INTO `users` (
 -- Sinh viên AT180123 (Sinh viên chính trong kịch bản test Frontend)
 (
   'u_std_001', 'at180123', 'at180123@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'student', 'Nguyễn Văn A', '0987123456', NULL,
   'AT180123', 'AT18A', 'AT18 (2021 - 2026)', 'An toàn Thông tin', '2003-08-12', NULL, NULL,
   -- Vector 128 chiều giả lập Face ID
@@ -66,21 +66,21 @@ INSERT INTO `users` (
 -- Các sinh viên khác
 (
   'u_std_002', 'at180245', 'at180245@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'student', 'Trần Thị B', '0912345678', NULL,
   'AT180245', 'AT18B', 'AT18 (2021 - 2026)', 'An toàn Thông tin', '2003-05-19', NULL, NULL,
   NULL, NULL, 1
 ),
 (
   'u_std_003', 'at180378', 'at180378@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'student', 'Lê Hoàng C', '0978999888', NULL,
   'AT180378', 'AT18A', 'AT18 (2021 - 2026)', 'An toàn Thông tin', '2003-11-02', NULL, NULL,
   NULL, NULL, 1
 ),
 (
   'u_std_004', 'ct060112', 'ct060112@actvn.edu.vn',
-  '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',
+  '$2b$12$BGdrqoHawsyKEEfQxHF27u6AAege5peABJZNGnAaFqwiReOw.wYQ2',
   'student', 'Phạm Minh D', '0933221100', NULL,
   'CT060112', 'CT06A', 'CT06 (2022 - 2027)', 'Công nghệ Thông tin', '2004-03-25', NULL, NULL,
   NULL, NULL, 1

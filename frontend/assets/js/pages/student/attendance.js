@@ -140,6 +140,20 @@ function triggerVerification() {
   btn.style.opacity = '0.75';
   btn.disabled = true;
 
+  // Gọi đồng thời Backend API nếu máy chủ đang chạy
+  if (window.KmaApi) {
+    window.KmaApi.post('/attendance/verify', {
+      event_id: ev.id,
+      check_type: win.activePhase,
+      user_latitude: 20.9806,
+      user_longitude: 105.7958,
+    }).then(function (res) {
+      console.log('✓ Kết quả ghi nhận từ MySQL Server:', res);
+    }).catch(function (err) {
+      console.warn('API sync warning (chế độ local dự phòng):', err.message);
+    });
+  }
+
   setTimeout(function () {
     const nowStr = window.KmaTimeRules.formatClock(new Date());
     const logs = getAttendanceLogs();

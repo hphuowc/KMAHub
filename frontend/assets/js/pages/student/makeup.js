@@ -122,6 +122,21 @@ function handleMakeupSubmit(e) {
 
   const checkType = document.querySelector('input[name="checkType"]:checked').value;
   const nowStr = window.KmaTimeRules.formatDateTime(new Date());
+  const reasonText = (document.getElementById('makeupReason') && document.getElementById('makeupReason').value) || 'Minh chứng tham dự sự kiện';
+
+  // Đồng bộ lên MySQL qua FastAPI nếu server đang mở
+  if (window.KmaApi) {
+    const rawCheckType = checkType.toLowerCase().includes('in') ? 'CHECKIN' : 'CHECKOUT';
+    window.KmaApi.post('/makeup/submit', {
+      event_id: eventId,
+      check_type: rawCheckType,
+      reason: reasonText,
+    }).then(function (res) {
+      console.log('✓ Đã lưu đơn bù vào MySQL:', res);
+    }).catch(function (err) {
+      console.warn('API sync warning (chế độ local dự phòng):', err.message);
+    });
+  }
 
   const reqs = JSON.parse(localStorage.getItem('kma_realtime_makeup_requests') || '{}');
   reqs[eventId] = {

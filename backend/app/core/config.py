@@ -4,6 +4,7 @@ File: backend/app/core/config.py
 """
 
 from typing import List
+from urllib.parse import quote_plus
 from pydantic_settings import BaseSettings
 from pydantic import Field
 
@@ -14,11 +15,30 @@ class Settings(BaseSettings):
     APP_PORT: int = 8000
     API_PREFIX: str = "/api"
 
-    # MySQL connection string
+    # MySQL individual credentials
+    DB_HOST: str = "localhost"
+    DB_PORT: int = 3306
+    DB_USER: str = "root"
+    DB_PASSWORD: str = ""
+    DB_NAME: str = "kma_hub"
+
+    # Raw database URL (optional fallback)
     DATABASE_URL: str = Field(
-        default="mysql+pymysql://root:root@localhost:3306/kma_hub?charset=utf8mb4",
+        default="",
         alias="DATABASE_URL",
     )
+
+    def get_database_url(self) -> str:
+        """
+        Dynamically constructs the database URL with proper URL-encoding
+        for special characters in password (such as '@', '#', etc.)
+        """
+        if self.DB_PASSWORD:
+            encoded_pwd = quote_plus(self.DB_PASSWORD)
+            return f"mysql+pymysql://{self.DB_USER}:{encoded_pwd}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?charset=utf8mb4"
+        if self.DATABASE_URL:
+            return self.DATABASE_URL
+        return f"mysql+pymysql://{self.DB_USER}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?charset=utf8mb4"
 
     # JWT Config
     JWT_SECRET: str = "kma_hub_super_secret_jwt_key_2025_actvn_cyber_sec"

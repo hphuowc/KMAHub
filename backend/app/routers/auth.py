@@ -42,15 +42,21 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
     )
 
     if not user:
+        count = db.query(User).count()
+        if count == 0:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Bảng 'users' trong MySQL hiện đang trống. Hãy chạy file database/seed_data.sql để nạp dữ liệu mẫu.",
+            )
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Tài khoản hoặc mật khẩu không chính xác.",
+            detail=f"Không tìm thấy tài khoản '{raw_user}' trong cơ sở dữ liệu.",
         )
 
     if not verify_password(payload.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Tài khoản hoặc mật khẩu không chính xác.",
+            detail="Mật khẩu không chính xác.",
         )
 
     # Generate JWT

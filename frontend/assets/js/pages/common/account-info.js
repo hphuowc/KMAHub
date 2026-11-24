@@ -312,8 +312,34 @@ function openPasswordModal() {
 function closePasswordModal() {
   document.getElementById('passwordModal').classList.remove('active');
 }
-function handlePasswordSubmit(e) {
+async function handlePasswordSubmit(e) {
   e.preventDefault();
+  const oldPassword = document.getElementById('oldPasswordInput') ? document.getElementById('oldPasswordInput').value : '';
+  const newPassword = document.getElementById('newPasswordInput') ? document.getElementById('newPasswordInput').value : '';
+  const confirmPassword = document.getElementById('confirmPasswordInput') ? document.getElementById('confirmPasswordInput').value : '';
+
+  if (newPassword !== confirmPassword) {
+    alert('Mật khẩu mới và xác nhận mật khẩu không khớp!');
+    return;
+  }
+
+  if (window.KmaApi) {
+    try {
+      const res = await window.KmaApi.post('/auth/change-password', {
+        old_password: oldPassword,
+        new_password: newPassword,
+      });
+      alert(res.message || 'Đổi mật khẩu thành công trong MySQL!');
+      closePasswordModal();
+      const form = document.getElementById('changePasswordForm');
+      if (form) form.reset();
+      return;
+    } catch (err) {
+      alert('Lỗi đổi mật khẩu: ' + err.message);
+      return;
+    }
+  }
+
   alert('Đổi mật khẩu thành công.');
   closePasswordModal();
 }

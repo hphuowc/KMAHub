@@ -9,7 +9,7 @@ from .config import settings
 
 # Engine configuration with connection pooling for MySQL
 engine = create_engine(
-    settings.DATABASE_URL,
+    settings.get_database_url(),
     pool_pre_ping=True,
     pool_recycle=3600,
     pool_size=10,

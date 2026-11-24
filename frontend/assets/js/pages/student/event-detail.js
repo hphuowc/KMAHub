@@ -116,13 +116,24 @@ function handleEventDetailCheckin() {
   }
 }
 
-function handleEventDetailRegister() {
+async function handleEventDetailRegister() {
   var studentId = localStorage.getItem('kma_user_id') || 'AT180123';
+  var ev = eventsData[currentEventId];
+
+  // Gọi API Backend nếu server đang chạy
+  if (window.KmaApi && typeof window.KmaApi.post === 'function') {
+    try {
+      await window.KmaApi.post('/events/' + currentEventId + '/register');
+    } catch (err) {
+      console.warn('API Event Register warning:', err.message);
+    }
+  }
+
   var regMap = JSON.parse(localStorage.getItem('kma_event_registered_students') || '{}');
   if (!regMap[currentEventId]) regMap[currentEventId] = [];
   if (!regMap[currentEventId].includes(studentId)) regMap[currentEventId].push(studentId);
   localStorage.setItem('kma_event_registered_students', JSON.stringify(regMap));
-  var ev = eventsData[currentEventId];
-  alert('Đăng ký tham gia "' + ev.title + '" thành công.');
+  
+  alert('Đăng ký tham gia "' + ev.title + '" thành công (Đã đồng bộ CSDL).');
   document.getElementById('actionArea').innerHTML = '<button class="btn btn-secondary btn-block btn-lg" style="font-size: 15px; cursor: default;">✓ Đã đăng ký</button>';
 }

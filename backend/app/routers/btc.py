@@ -54,6 +54,55 @@ def get_btc_dashboard(
     }
 
 
+@router.get("/events", response_model=List[EventResponse])
+def get_btc_events(
+    status_filter: Optional[str] = Query(None, alias="status"),
+    current_user: User = Depends(require_role(["btc", "admin"])),
+    db: Session = Depends(get_db),
+):
+    """Lists all events managed by BTC with live registered seats."""
+    query = db.query(Event)
+    if status_filter and status_filter != "all":
+        query = query.filter(Event.status == status_filter)
+
+    events = query.order_by(Event.start_time.desc()).all()
+    results = []
+    for ev in events:
+        reg_count = (
+            db.query(EventRegistration)
+            .filter(
+                EventRegistration.event_id == ev.id,
+                EventRegistration.status == "registered",
+            )
+            .count()
+        )
+        ev_dict = {
+            "id": ev.id,
+            "title": ev.title,
+            "category_id": ev.category_id,
+            "category_name": ev.category.name if ev.category else "Chung",
+            "organizer_id": ev.organizer_id,
+            "organizer_name": ev.organizer_name,
+            "location_name": ev.location_name,
+            "latitude": float(ev.latitude),
+            "longitude": float(ev.longitude),
+            "radius_meters": ev.radius_meters,
+            "start_time": ev.start_time,
+            "end_time": ev.end_time,
+            "registration_deadline": ev.registration_deadline,
+            "drl_points": ev.drl_points,
+            "max_seats": ev.max_seats,
+            "current_seats": reg_count,
+            "description": ev.description,
+            "banner_url": ev.banner_url,
+            "status": ev.status,
+            "is_registered": False,
+            "agendas": [],
+        }
+        results.append(EventResponse(**ev_dict))
+    return results
+
+
 @router.post("/events", response_model=MessageResponse)
 def create_event(
     payload: EventCreateRequest,

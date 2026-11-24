@@ -131,12 +131,13 @@
               <span class="search-icon" style="display:inline-flex; align-items:center;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               </span>
-              <input type="text" placeholder="Tìm kiếm sự kiện...">
+              <input type="text" id="btcSearchInput" placeholder="Tìm kiếm sự kiện..." oninput="handleBtcSearch(this.value)">
             </div>
             <div class="filter-tabs">
               <button class="filter-tab active" onclick="filterBtcEvents(this, 'all')">Tất cả</button>
-              <button class="filter-tab" onclick="filterBtcEvents(this, 'open')">Đang diễn ra</button>
+              <button class="filter-tab" onclick="filterBtcEvents(this, 'ongoing')">Đang diễn ra</button>
               <button class="filter-tab" onclick="filterBtcEvents(this, 'upcoming')">Sắp diễn ra</button>
+              <button class="filter-tab" onclick="filterBtcEvents(this, 'ended')">Đã kết thúc</button>
             </div>
           </div>
         </div>
@@ -153,46 +154,18 @@
                   <th style="text-align: right;">Thao tác</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr data-status="open">
+              <tbody id="btcEventsTableBody">
+                <tr data-status="ongoing">
                   <td>
                     <div style="font-weight: 600;">Hội thảo An ninh mạng</div>
                     <div style="font-size: 12px; color: var(--color-text-muted);">Hội trường A1</div>
                   </td>
-                  <td>24/04 • 08:30</td>
+                  <td>Hôm nay • 08:30</td>
                   <td>86 / 120</td>
                   <td><span class="badge badge-success">Đang mở</span></td>
                   <td style="text-align: right;">
                     <a href="event-create.html" class="action-link">Sửa</a> • 
-                    <a href="registrants.html?event=cyber" class="action-link" title="Xem danh sách đăng ký sự kiện này">Xem (86 SV)</a>
-                  </td>
-                </tr>
-
-                <tr data-status="upcoming">
-                  <td>
-                    <div style="font-weight: 600;">Ngày hội Sinh viên KMA</div>
-                    <div style="font-size: 12px; color: var(--color-text-muted);">Sân trường</div>
-                  </td>
-                  <td>30/04 • 07:00</td>
-                  <td>234 / 500</td>
-                  <td><span class="badge badge-neutral">Đã xuất bản</span></td>
-                  <td style="text-align: right;">
-                    <a href="event-create.html" class="action-link">Sửa</a> • 
-                    <a href="registrants.html?event=ai" class="action-link" title="Xem danh sách đăng ký sự kiện này">Xem (142 SV)</a>
-                  </td>
-                </tr>
-
-                <tr data-status="upcoming">
-                  <td>
-                    <div style="font-weight: 600;">Workshop AI Innovation</div>
-                    <div style="font-size: 12px; color: var(--color-text-muted);">Hội trường B2</div>
-                  </td>
-                  <td>05/05 • 13:30</td>
-                  <td>40 / 60</td>
-                  <td><span class="badge badge-neutral">Bản nháp</span></td>
-                  <td style="text-align: right;">
-                    <a href="event-create.html" class="action-link">Sửa</a> • 
-                    <a href="javascript:void(0)" class="action-link" style="color: var(--color-success);" onclick="alert('Đã xuất bản sự kiện thành công!');">Xuất bản</a>
+                    <a href="registrants.html?event=cyber_2025" class="action-link" title="Xem danh sách đăng ký sự kiện này">Xem (86 SV)</a>
                   </td>
                 </tr>
               </tbody>
